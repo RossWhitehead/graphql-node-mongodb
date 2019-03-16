@@ -1,12 +1,11 @@
 const express = require('express')
 const grapghqlHTTP = require('express-graphql')
-const { makeExecutableSchema } = require('graphql-tools')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 require('dotenv').config()
 
-const schema = require('./graphql/schema')
+const schema = require('./graphql/schema').schema
 const root = require('./graphql/resolvers')
 
 const app = express();
@@ -21,7 +20,7 @@ mongoose
             useNewUrlParser: true
         })
     .then(() => console.log('MongoDB connected'))
-.catch(err => console.log(err));
+    .catch(err => console.log(err));
 
 app.use(
     '/graphql',
